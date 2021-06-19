@@ -47,8 +47,8 @@
 		</table>
 		<nav>
 			<ul class="pager">
-				<li class="previous"><a th:href="@{'/api/books?page='+${books.number - 1}}">上一頁</a></li>
-				<li class="next"><a th:href="@{'/api/books?page='+${books.number + 1}}">下一頁</a></li>
+				<li class="previous"><a th:href="@{'/api/books?page='+${books.number - 1}}" th:unless="${books.first}">上一頁</a></li>
+				<li class="next"><a th:href="@{'/api/books?page='+${books.number + 1}}" th:unless="${books.last}">下一頁</a></li>
 			</ul>
 		</nav>
 	</div>	

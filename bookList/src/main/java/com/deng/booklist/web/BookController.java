@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,12 +34,11 @@ public class BookController {
 	 * @return
 	 */
 	@GetMapping("/books")
-	public String list(@RequestParam(defaultValue = "0") int page, 
-			@RequestParam(defaultValue = "5") int size,
+	public String list(@PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable, 
 			Model model){
 //		List<Book> books = bookService.getAll();
-		Sort sort = Sort.by(Sort.Direction.DESC, "id");
-		Pageable pageable = PageRequest.of(page, size, sort);
+//		Sort sort = Sort.by(Sort.Direction.DESC, "id");
+//		Pageable pageable = PageRequest.of(page, size, sort);
 		Page<Book> books = bookService.findAllByPage(pageable);
 		model.addAttribute("books", books);
 		return "list";
@@ -99,10 +100,9 @@ public class BookController {
 	 */
 	@GetMapping("/pages")
 	public Page<Book> findAllByPage(
-			@RequestParam(defaultValue = "0") int page, 
-			@RequestParam(defaultValue = "5") int size){
-		Sort sort = Sort.by(Sort.Direction.DESC, "id");
-		Pageable pageable = PageRequest.of(page, size, sort);
+			@PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable){
+//		Sort sort = Sort.by(Sort.Direction.DESC, "id");
+//		Pageable pageable = PageRequest.of(page, size, sort);
 		return bookService.findAllByPage(pageable);
 	}
 	
