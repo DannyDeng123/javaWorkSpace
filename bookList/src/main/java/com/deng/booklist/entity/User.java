@@ -19,10 +19,10 @@ public class User {
 	@GeneratedValue
 	private long id;
 	
-	@Column
+	@Column(nullable = false)
 	private String username;
 	
-	@Column
+	@Column(nullable = false)
 	private String password;
 	
 	@Column
