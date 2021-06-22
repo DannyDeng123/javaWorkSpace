@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.deng.booklist.entity.User;
+import com.deng.booklist.form.UserForm;
 import com.deng.booklist.repository.UserRepository;
 
 @Controller
@@ -25,17 +25,10 @@ public class LoginController {
 	}
 	
 	@PostMapping("/register")
-	public String registerPost(@RequestParam String username,
-								@RequestParam String password,
-								@RequestParam int phone,
-								@RequestParam String email) {
-		User user = new User();
-		user.setUsername(username);
-		user.setPassword(password);
-		user.setPhone(phone);
-		user.setEmail(email);
+	public String registerPost(UserForm userForm) {
+		User user = userForm.convertToUser();
 		userRepository.save(user);
-		
 		return "redirect:/login";
 	}
+	
 }
