@@ -26,7 +26,7 @@ public class User {
 	private String password;
 	
 	@Column
-	private int phone;
+	private String phone;
 	
 	@Column
 	private String email;

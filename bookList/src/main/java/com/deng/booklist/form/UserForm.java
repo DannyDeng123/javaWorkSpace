@@ -1,5 +1,10 @@
 package com.deng.booklist.form;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.BeanUtils;
 
 import com.deng.booklist.entity.User;
@@ -9,16 +14,23 @@ import lombok.Setter;
 
 @Getter@Setter
 public class UserForm {
-	private long id;
 	
+	@NotBlank(message = "帳號不可為空")
 	private String username;
 	
+	@NotBlank(message = "密碼不可為空")
+	@Length(min = 6, message = "密碼最少6位數")
 	private String password;
 	
+	@NotBlank(message = "確認密碼不可為空")
+	@Length(min = 6, message = "密碼最少6位數")
 	private String confirmPassword;
 	
-	private int phone;
+	@NotBlank
+	@Pattern(regexp = "^09\\d{8}$", message = "請填寫正確手機號碼")
+	private String phone;
 	
+	@Email(message = "請填寫正確email")
 	private String email;
 	
 	private class UserFormConvert implements FormConvert<UserForm, User> {
@@ -28,6 +40,11 @@ public class UserForm {
 			BeanUtils.copyProperties(userForm, user);
 			return user;
 		}
+	}
+	
+	public boolean confirmPassword() {
+		if(this.getPassword().equals(this.getConfirmPassword())) {return true;}
+		return false;
 	}
 	
 	public User convertToUser() {
