@@ -30,6 +30,7 @@ public class UserForm {
 	@Pattern(regexp = "^09\\d{8}$", message = "請填寫正確手機號碼")
 	private String phone;
 	
+	@NotBlank(message = "email不可為空")
 	@Email(message = "請填寫正確email")
 	private String email;
 	

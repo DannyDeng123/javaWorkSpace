@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.deng.booklist.entity.Book;
+import com.deng.booklist.exception.BookNotFoundException;
 import com.deng.booklist.repository.BookRepository;
 
 @Service
@@ -32,7 +33,12 @@ public class BookService {
 	 * @return
 	 */
 	public Book findById(long id) {
-		return bookRepository.getById(id);
+			Book book = bookRepository.findOne(id);
+			System.out.println(book == null);
+			if(book == null) {
+				throw new BookNotFoundException("您的書單中不存在這本書");
+			}
+			return book;
 	}
 	
 	/**

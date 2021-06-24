@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.deng.booklist.entity.Book;
 
 public interface BookRepository extends JpaRepository<Book, Long>{
+
+	@Query(value = "SELECT * FROM book WHERE id = ?1", nativeQuery = true)
+	Book findOne(long id);
 	
 	Page<Book> findAll(Pageable pageable);
 	

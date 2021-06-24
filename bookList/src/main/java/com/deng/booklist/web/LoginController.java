@@ -39,10 +39,10 @@ public class LoginController {
 			result.rejectValue("confirmPassword", "confirm", "兩次密碼必須相同");
 		}
 		if(result.hasErrors()) {
-//			List<FieldError> errList = result.getFieldErrors();
-//			for(FieldError err : errList) {
-//				System.out.println(err.getField() + " : " + err.getDefaultMessage() + " : " + err.getCode());
-//			}
+			List<FieldError> errList = result.getFieldErrors();
+			for(FieldError err : errList) {
+				System.out.println(err.getField() + " : " + err.getDefaultMessage() + " : " + err.getCode());
+			}
 			return "register";
 		}
 		User user = userForm.convertToUser();
@@ -50,4 +50,8 @@ public class LoginController {
 		return "redirect:/login";
 	}
 	
+	@GetMapping("/exception")
+	public String testException() {
+		throw new RuntimeException("測試異常處理");
+	}
 }
