@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.deng.booklist.entity.Book;
@@ -47,7 +49,7 @@ public class BookController {
 	 * @return
 	 */
 	@GetMapping("/book/{id}")
-	public String deteil(@PathVariable long id, Model model) {
+	public String getBook(@PathVariable long id, Model model) {
 		Book book = (Book) bookService.findById(id);
 		model.addAttribute("book", book);
 		return "book";
@@ -83,7 +85,7 @@ public class BookController {
 	 */
 	@PostMapping("/books")
 	public String inputPage(Book book, final RedirectAttributes attributes) {
-		Book book1 = bookService.add(book);
+		Book book1 = bookService.addBook(book);
 		if(book1 != null) {
 			attributes.addFlashAttribute("message", "《" + book1.getName() + "》 信息提交成功");
 		}

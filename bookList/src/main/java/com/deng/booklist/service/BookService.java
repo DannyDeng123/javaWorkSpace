@@ -2,6 +2,8 @@ package com.deng.booklist.service;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,12 +35,16 @@ public class BookService {
 	 * @return
 	 */
 	public Book findById(long id) {
-			Book book = bookRepository.findOne(id);
-			System.out.println(book == null);
-			if(book == null) {
-				throw new BookNotFoundException("您的書單中不存在這本書");
-			}
-			return book;
+		Book book = bookRepository.findById(id).orElse(null);
+		if(book == null) {
+			throw new BookNotFoundException("您的書單中不存在這本書");
+		}
+		return book;
+//		try {
+//			return book;
+//		} catch (Exception e) {
+//			throw new BookNotFoundException("您的書單中不存在這本書");
+//		}
 	}
 	
 	/**
@@ -46,8 +52,32 @@ public class BookService {
 	 * @param book
 	 * @return
 	 */
-	public Book add(Book book) {
+	public Book addBook(Book book) {
 		return bookRepository.save(book);
+	}
+	
+	/**
+	 * 更新一本書
+	 * @param book
+	 * @return
+	 */
+	public Book updateBook(Book book) {
+		return bookRepository.save(book);
+	}
+	
+	/**
+	 * 根據id刪除一本書
+	 * @param id
+	 */
+	public void deleteBookById(long id) {
+		bookRepository.deleteById(id);;
+	}
+	
+	/**
+	 * 刪除整個書單
+	 */
+	public void deleteAllBooks() {
+		bookRepository.deleteAll();
 	}
 	
 	/**

@@ -25,7 +25,6 @@ public class ExceptionController {
 	public ModelAndView handleException(HttpServletRequest request, Exception e) throws Exception {
 		logger.error("RequesrURL:{}, Exception:{}", request.getRequestURL(), e.getMessage());
 		
-		//只處理這個controller的異常
 		if(AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
 			throw e;
 		}
