@@ -6,5 +6,5 @@ import com.deng.booklist.entity.Book;
 import com.deng.booklist.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
-
+	User findByUsernameAndPassword(String username, String password);
 }

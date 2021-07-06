@@ -19,11 +19,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.deng.booklist.entity.Book;
 import com.deng.booklist.service.BookService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+
 @RestController
 @RequestMapping("/rest")
 public class BookJsonApi {
 	@Autowired
 	private BookService bookService;
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	/**
 	 * 獲取一個書單列表
@@ -32,6 +39,7 @@ public class BookJsonApi {
 	@GetMapping("/books")
 	public ResponseEntity<?> list(){
 		List<Book> books = bookService.getAll();
+		logger.info("info---整個書單列表");
 		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
 	}
 	
@@ -43,6 +51,7 @@ public class BookJsonApi {
 	@GetMapping("/books/{id}")
 	public ResponseEntity<?> getBook(@PathVariable long id){
 		Book book = bookService.findById(id);
+		logger.info("info---獲取到書名為: {} 的書",book.getName());
 		return new ResponseEntity<Book>(book, HttpStatus.OK);
 	}
 	

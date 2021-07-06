@@ -49,7 +49,12 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
+
 		<!-- springboot2.5.0 Validation starter not included in web starters anymore. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
