@@ -1,5 +1,7 @@
 package com.deng.booklist.form;
 
+import java.util.Date;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -17,6 +19,9 @@ public class UserForm {
 	
 	@NotBlank(message = "帳號不可為空")
 	private String username;
+	
+	@NotBlank(message = "暱稱不可為空")
+	private String nickname;
 	
 	@NotBlank(message = "密碼不可為空")
 	@Length(min = 6, message = "密碼最少6位數")
@@ -50,6 +55,7 @@ public class UserForm {
 	
 	public User convertToUser() {
 		User user = new UserFormConvert().convert(this);
+		user.setSignDate(new Date());
 		return user;
 	}
 }

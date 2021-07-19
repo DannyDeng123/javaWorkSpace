@@ -18,6 +18,11 @@
 					<p class="form-control-static text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"/>
 				</div>
 				<div class="form-group">
+					<label for="usernameId">暱&emsp;&emsp;稱</label>
+					<input type="text" name="nickname" id="nicknameId" class="form-control" th:field="*{nickname}">
+					<p class="form-control-static text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"/>
+				</div>
+				<div class="form-group">
 					<label for="passwordId">密&emsp;&emsp;碼</label>
 					<input type="password" name="password" id="passwordId" class="form-control" th:field="*{password}">
 					<p class="form-control-static text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
